@@ -310,11 +310,13 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			// Add new images by increasing galleryMax.
-			var galleryMax = 43;
+			// Images 1-43 are .png; images 44+ are .jpg.
+			var galleryMax = 68;
 			var galleryImages = [];
 			for (var i = 1; i <= galleryMax; i += 1) {
 				galleryImages.push(i);
 			}
+			var galleryExt = function (n) { return n <= 43 ? '.png' : '.jpg'; };
 			var galleryTitles = {
 				1: 'Pelouse',
 				2: 'Taille',
@@ -337,7 +339,7 @@
 				var thumbHtml = ''
 					+ '<div class="col-md-3 thumbnail">'
 					+ '<div class="hovereffect">'
-					+ '<div class="col-md-12 photo" style="background-image: url(\'img/' + imageNumber + '.png\');"></div>'
+					+ '<div class="col-md-12 photo" style="background-image: url(\'img/' + imageNumber + galleryExt(imageNumber) + '\');"></div>'
 					+ '<a href="#mybox" data-toggle="modal" data-slide-to="' + index + '">' + overlayHtml + '</a>'
 					+ '</div>'
 					+ '</div>';
@@ -346,7 +348,7 @@
 				var itemClass = index === 0 ? 'item active' : 'item';
 				var carouselHtml = ''
 					+ '<div class="' + itemClass + '">'
-					+ '<img src="img/' + imageNumber + '.png" alt="slide">'
+					+ '<img src="img/' + imageNumber + galleryExt(imageNumber) + '" alt="slide">'
 					+ '</div>';
 				carouselInner.insertAdjacentHTML('beforeend', carouselHtml);
 			});
